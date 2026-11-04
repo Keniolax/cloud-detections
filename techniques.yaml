@@ -1,0 +1,84 @@
+# The seven attacks this week emulates, and how each is detected. This is the
+# single source of truth: the detonate, collect, verify and test scripts all
+# read it, so the technique list never drifts between the code, the rules and
+# the evidence.
+#
+# event_names is confirmed against the real CloudTrail evidence collected this
+# week (evidence/events/*.json).
+
+- key: cloudtrail-stop
+  stratus: aws.defense-evasion.cloudtrail-stop
+  mitre: T1562.008
+  tactic: Defense Evasion
+  name: CloudTrail logging stopped
+  wazuh_id: 100700
+  sigma: cloudtrail_logging_stopped.yml
+  athena: cloudtrail_stop.sql
+  event_source: cloudtrail.amazonaws.com
+  event_names: [StopLogging]
+
+- key: cloudtrail-event-selectors
+  stratus: aws.defense-evasion.cloudtrail-event-selectors
+  mitre: T1562.008
+  tactic: Defense Evasion
+  name: CloudTrail event selectors changed
+  wazuh_id: 100701
+  sigma: cloudtrail_event_selectors_changed.yml
+  athena: cloudtrail_event_selectors.sql
+  event_source: cloudtrail.amazonaws.com
+  event_names: [PutEventSelectors]
+
+- key: iam-create-admin-user
+  stratus: aws.persistence.iam-create-admin-user
+  mitre: T1098.003
+  tactic: Persistence
+  name: Administrator policy attached to IAM user
+  wazuh_id: 100702
+  sigma: iam_admin_policy_attached.yml
+  athena: iam_admin_policy_attached.sql
+  event_source: iam.amazonaws.com
+  event_names: [AttachUserPolicy]
+
+- key: iam-backdoor-user
+  stratus: aws.persistence.iam-backdoor-user
+  mitre: T1098.001
+  tactic: Persistence
+  name: IAM access key created
+  wazuh_id: 100703
+  sigma: iam_access_key_created.yml
+  athena: iam_access_key_created.sql
+  event_source: iam.amazonaws.com
+  event_names: [CreateAccessKey]
+
+- key: s3-backdoor-bucket-policy
+  stratus: aws.exfiltration.s3-backdoor-bucket-policy
+  mitre: T1537
+  tactic: Exfiltration
+  name: S3 bucket policy changed to allow external access
+  wazuh_id: 100704
+  sigma: s3_bucket_policy_backdoored.yml
+  athena: s3_bucket_policy_backdoored.sql
+  event_source: s3.amazonaws.com
+  event_names: [PutBucketPolicy]
+
+- key: secretsmanager-batch-retrieve-secrets
+  stratus: aws.credential-access.secretsmanager-batch-retrieve-secrets
+  mitre: T1555.006
+  tactic: Credential Access
+  name: Bulk retrieval of Secrets Manager secrets
+  wazuh_id: 100705
+  sigma: secretsmanager_batch_retrieve.yml
+  athena: secretsmanager_batch_retrieve.sql
+  event_source: secretsmanager.amazonaws.com
+  event_names: [BatchGetSecretValue]
+
+- key: ses-enumerate
+  stratus: aws.discovery.ses-enumerate
+  mitre: T1580
+  tactic: Discovery
+  name: SES enumeration
+  wazuh_id: 100706
+  sigma: ses_enumeration.yml
+  athena: ses_enumeration.sql
+  event_source: ses.amazonaws.com
+  event_names: [GetAccount, GetSendQuota, GetAccountSendingEnabled, ListIdentities]

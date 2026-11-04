@@ -1,0 +1,28 @@
+title: IAM Access Key Created
+id: a1f1e2b0-44aa-4b44-9c04-iamcreatekey
+status: experimental
+description: >
+  An attacker created a long-lived access key on an IAM user, a common way to
+  keep a foothold after the initial access is cut (persistence). Emulated by
+  Stratus Red Team aws.persistence.iam-backdoor-user.
+references:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/cloud/aws/cloudtrail/aws_iam_backdoor_users.yml
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.persistence.iam-backdoor-user/
+author: seceng-bootcamp (week 11), after SigmaHQ aws_iam_backdoor_users
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: iam.amazonaws.com
+    eventName: CreateAccessKey
+  condition: selection
+falsepositives:
+  - A user rotating their own access key.
+level: medium
+tags:
+  - attack.persistence
+  - attack.t1098.001
+wazuh:
+  id: 100703
+  level: 10

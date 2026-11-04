@@ -1,0 +1,33 @@
+title: SES Enumeration
+id: a1f1e2b0-77aa-4b77-9c07-sesenumerate
+status: experimental
+description: >
+  An attacker enumerated Simple Email Service to find out whether the account
+  can send mail and how much, a precursor to using it for phishing or spam
+  (discovery). Emulated by Stratus Red Team aws.discovery.ses-enumerate. The
+  matched event names are confirmed against the real CloudTrail evidence this
+  week collected.
+references:
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.discovery.ses-enumerate/
+author: seceng-bootcamp (week 11)
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: ses.amazonaws.com
+    eventName:
+      - GetAccount
+      - GetSendQuota
+      - GetAccountSendingEnabled
+      - ListIdentities
+  condition: selection
+falsepositives:
+  - A monitoring tool that checks SES sending status.
+level: low
+tags:
+  - attack.discovery
+  - attack.t1580
+wazuh:
+  id: 100706
+  level: 8

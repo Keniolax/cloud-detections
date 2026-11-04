@@ -1,0 +1,53 @@
+<!-- Generated from sigma/ by convert/sigma_to_wazuh.py. Do not edit by hand. -->
+<group name="cloud,detections,aws,">
+  <rule id="100700" level="12">
+    <if_sid>80200</if_sid>
+    <field name="aws.eventSource" type="pcre2">^cloudtrail\.amazonaws\.com$</field>
+    <field name="aws.eventName" type="pcre2">^StopLogging$</field>
+    <description>CloudTrail Logging Stopped</description>
+    <mitre><id>T1562.008</id></mitre>
+  </rule>
+  <rule id="100701" level="12">
+    <if_sid>80200</if_sid>
+    <field name="aws.eventSource" type="pcre2">^cloudtrail\.amazonaws\.com$</field>
+    <field name="aws.eventName" type="pcre2">^PutEventSelectors$</field>
+    <description>CloudTrail Event Selectors Changed</description>
+    <mitre><id>T1562.008</id></mitre>
+  </rule>
+  <rule id="100702" level="12">
+    <if_sid>80200</if_sid>
+    <field name="aws.eventSource" type="pcre2">^iam\.amazonaws\.com$</field>
+    <field name="aws.eventName" type="pcre2">^AttachUserPolicy$</field>
+    <field name="aws.requestParameters.policyArn" type="pcre2">AdministratorAccess</field>
+    <description>Administrator Policy Attached to IAM User</description>
+    <mitre><id>T1098.003</id></mitre>
+  </rule>
+  <rule id="100703" level="10">
+    <if_sid>80200</if_sid>
+    <field name="aws.eventSource" type="pcre2">^iam\.amazonaws\.com$</field>
+    <field name="aws.eventName" type="pcre2">^CreateAccessKey$</field>
+    <description>IAM Access Key Created</description>
+    <mitre><id>T1098.001</id></mitre>
+  </rule>
+  <rule id="100704" level="10">
+    <if_sid>80200</if_sid>
+    <field name="aws.eventSource" type="pcre2">^s3\.amazonaws\.com$</field>
+    <field name="aws.eventName" type="pcre2">^PutBucketPolicy$</field>
+    <description>S3 Bucket Policy Changed to Allow External Access</description>
+    <mitre><id>T1537</id></mitre>
+  </rule>
+  <rule id="100705" level="10">
+    <if_sid>80200</if_sid>
+    <field name="aws.eventSource" type="pcre2">^secretsmanager\.amazonaws\.com$</field>
+    <field name="aws.eventName" type="pcre2">^BatchGetSecretValue$</field>
+    <description>Bulk Retrieval of Secrets Manager Secrets</description>
+    <mitre><id>T1555.006</id></mitre>
+  </rule>
+  <rule id="100706" level="8">
+    <if_sid>80200</if_sid>
+    <field name="aws.eventSource" type="pcre2">^ses\.amazonaws\.com$</field>
+    <field name="aws.eventName" type="pcre2">^(?:GetAccount|GetSendQuota|GetAccountSendingEnabled|ListIdentities)$</field>
+    <description>SES Enumeration</description>
+    <mitre><id>T1580</id></mitre>
+  </rule>
+</group>

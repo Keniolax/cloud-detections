@@ -1,0 +1,28 @@
+title: CloudTrail Logging Stopped
+id: a1f1e2b0-11aa-4b11-9c01-cloudtrailstop
+status: experimental
+description: >
+  An attacker stopped a CloudTrail trail to blind the account's audit log
+  (defence evasion). Emulated by Stratus Red Team
+  aws.defense-evasion.cloudtrail-stop.
+references:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/cloud/aws/cloudtrail/aws_cloudtrail_disable_logging.yml
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.defense-evasion.cloudtrail-stop/
+author: seceng-bootcamp (week 11), after SigmaHQ aws_cloudtrail_disable_logging
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: cloudtrail.amazonaws.com
+    eventName: StopLogging
+  condition: selection
+falsepositives:
+  - An administrator intentionally pausing a trail during maintenance.
+level: high
+tags:
+  - attack.defense-evasion
+  - attack.t1562.008
+wazuh:
+  id: 100700
+  level: 12

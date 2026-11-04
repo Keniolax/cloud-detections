@@ -1,0 +1,29 @@
+title: CloudTrail Event Selectors Changed
+id: a1f1e2b0-22aa-4b22-9c02-cloudtrailselect
+status: experimental
+description: >
+  An attacker narrowed a trail's event selectors to stop it recording the
+  events that would expose them, without stopping the trail outright (defence
+  evasion). Emulated by Stratus Red Team
+  aws.defense-evasion.cloudtrail-event-selectors.
+references:
+  - https://github.com/SigmaHQ/sigma/blob/master/rules/cloud/aws/cloudtrail/aws_cloudtrail_disable_logging.yml
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.defense-evasion.cloudtrail-event-selectors/
+author: seceng-bootcamp (week 11), after SigmaHQ aws_cloudtrail_disable_logging
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: cloudtrail.amazonaws.com
+    eventName: PutEventSelectors
+  condition: selection
+falsepositives:
+  - An administrator legitimately re-scoping what a trail records.
+level: high
+tags:
+  - attack.defense-evasion
+  - attack.t1562.008
+wazuh:
+  id: 100701
+  level: 12

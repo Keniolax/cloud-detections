@@ -1,0 +1,30 @@
+title: Administrator Policy Attached to IAM User
+id: a1f1e2b0-33aa-4b33-9c03-iamadminattach
+status: experimental
+description: >
+  An attacker attached the AWS-managed AdministratorAccess policy to an IAM
+  user, granting full control (persistence / privilege escalation). Emulated by
+  Stratus Red Team aws.persistence.iam-create-admin-user, which creates a user
+  and attaches AdministratorAccess.
+references:
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.persistence.iam-create-admin-user/
+author: seceng-bootcamp (week 11)
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: iam.amazonaws.com
+    eventName: AttachUserPolicy
+    requestParameters.policyArn|contains: AdministratorAccess
+  condition: selection
+falsepositives:
+  - A rare, reviewed grant of admin to a break-glass user.
+level: high
+tags:
+  - attack.persistence
+  - attack.privilege-escalation
+  - attack.t1098.003
+wazuh:
+  id: 100702
+  level: 12

@@ -1,0 +1,16 @@
+# Terraform state and provider cache never enter git.
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfplan
+
+# Secrets: the SIEM keys the Makefile writes for the Wazuh container.
+.env
+*.tfvars
+
+# Raw Athena output and scratch evidence we do not ship.
+evidence/raw/
+evidence/athena/*.csv
+__pycache__/
+.pytest_cache/

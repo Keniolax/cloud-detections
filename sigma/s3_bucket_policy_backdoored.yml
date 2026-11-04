@@ -1,0 +1,28 @@
+title: S3 Bucket Policy Changed to Allow External Access
+id: a1f1e2b0-55aa-4b55-9c05-s3backdoorpol
+status: experimental
+description: >
+  An attacker rewrote an S3 bucket policy to let an external account read the
+  bucket, a path to exfiltrate the data to an account they control. Emulated by
+  Stratus Red Team aws.exfiltration.s3-backdoor-bucket-policy.
+references:
+  - https://stratus-red-team.cloud/attack-techniques/AWS/aws.exfiltration.s3-backdoor-bucket-policy/
+author: seceng-bootcamp (week 11)
+logsource:
+  product: aws
+  service: cloudtrail
+detection:
+  selection:
+    eventSource: s3.amazonaws.com
+    eventName: PutBucketPolicy
+  condition: selection
+falsepositives:
+  - A deployment tool that manages bucket policies. Pair with a check of the
+    new policy's Principal for cross-account access.
+level: medium
+tags:
+  - attack.exfiltration
+  - attack.t1537
+wazuh:
+  id: 100704
+  level: 10
