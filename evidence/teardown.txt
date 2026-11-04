@@ -1,0 +1,32 @@
+# Account state snapshot
+# taken: 2026-11-04T22:12:21Z
+# account: 198811874138
+# region: us-east-1
+
+## S3 buckets
+
+## CloudTrail trails
+
+## GuardDuty detectors (us-east-1)
+An error occurred (SubscriptionRequiredException) when calling the ListDetectors operation: The AWS Access Key Id needs a subscription for the service
+
+## Athena workgroups
+primary
+
+## Glue databases
+
+## IAM users
+seceng-bootcamp
+
+## IAM roles (customer-managed, excluding AWS service-linked)
+
+## EC2 instances (us-east-1)
+
+## EC2 security groups (us-east-1)
+default
+sg-088396e47cea2d6cd
+
+## Account S3 public access block
+
+An error occurred (NoSuchPublicAccessBlockConfiguration) when calling the GetPublicAccessBlock operation: The public access block configuration was not found
+(none set)

@@ -1,0 +1,13 @@
+[
+  {
+    "eventtime": "2026-11-04T21:59:32Z",
+    "eventname": "AttachUserPolicy",
+    "eventsource": "iam.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "target_user": "malicious-iam-user",
+    "policy_arn": "arn:aws:iam::aws:policy/AdministratorAccess",
+    "sourceipaddress": "160.79.106.130",
+    "awsregion": "us-east-1",
+    "eventid": "2dfa774c-11b8-4bcc-8244-40436dd7bc5c"
+  }
+]

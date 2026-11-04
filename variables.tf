@@ -10,6 +10,16 @@ variable "name_prefix" {
   default     = "seceng-cloud-det"
 }
 
+variable "enable_guardduty" {
+  description = <<-EOT
+    Turn on the GuardDuty detector. On a normal account GuardDuty is free for
+    the first 30 days; the bootcamp throwaway account cannot subscribe to it
+    (SubscriptionRequiredException), so that run passes false.
+  EOT
+  type        = bool
+  default     = true
+}
+
 data "aws_caller_identity" "current" {}
 
 locals {

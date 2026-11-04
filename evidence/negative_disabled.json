@@ -1,0 +1,102 @@
+{
+  "window": {
+    "start": "2026-11-04T21:58:11Z",
+    "end": "2026-11-04T22:01:02Z"
+  },
+  "techniques": [
+    {
+      "key": "cloudtrail-stop",
+      "stratus": "aws.defense-evasion.cloudtrail-stop",
+      "mitre": "T1562.008",
+      "wazuh_id": 100700,
+      "athena_detected": true,
+      "athena_rows": 1,
+      "cloudtrail_event": {
+        "eventid": "bf995dac-1d50-4eb5-942f-f1ce6d615b70",
+        "eventtime": "2026-11-04T21:59:21Z",
+        "eventname": "StopLogging"
+      },
+      "wazuh_alert": null
+    },
+    {
+      "key": "cloudtrail-event-selectors",
+      "stratus": "aws.defense-evasion.cloudtrail-event-selectors",
+      "mitre": "T1562.008",
+      "wazuh_id": 100701,
+      "athena_detected": true,
+      "athena_rows": 2,
+      "cloudtrail_event": {
+        "eventid": "c4c96998-aa31-4fa7-830d-5f990bf65327",
+        "eventtime": "2026-11-04T21:58:36Z",
+        "eventname": "PutEventSelectors"
+      },
+      "wazuh_alert": null
+    },
+    {
+      "key": "iam-create-admin-user",
+      "stratus": "aws.persistence.iam-create-admin-user",
+      "mitre": "T1098.003",
+      "wazuh_id": 100702,
+      "athena_detected": true,
+      "athena_rows": 1,
+      "cloudtrail_event": {
+        "eventid": "2dfa774c-11b8-4bcc-8244-40436dd7bc5c",
+        "eventtime": "2026-11-04T21:59:32Z",
+        "eventname": "AttachUserPolicy"
+      },
+      "wazuh_alert": null
+    },
+    {
+      "key": "iam-backdoor-user",
+      "stratus": "aws.persistence.iam-backdoor-user",
+      "mitre": "T1098.001",
+      "wazuh_id": 100703,
+      "athena_detected": false,
+      "athena_rows": 0,
+      "cloudtrail_event": null,
+      "wazuh_alert": null
+    },
+    {
+      "key": "s3-backdoor-bucket-policy",
+      "stratus": "aws.exfiltration.s3-backdoor-bucket-policy",
+      "mitre": "T1537",
+      "wazuh_id": 100704,
+      "athena_detected": true,
+      "athena_rows": 3,
+      "cloudtrail_event": {
+        "eventid": "7183af5c-ede2-4160-8858-11838a53b7af",
+        "eventtime": "2026-11-04T21:59:18Z",
+        "eventname": "PutBucketPolicy"
+      },
+      "wazuh_alert": null
+    },
+    {
+      "key": "secretsmanager-batch-retrieve-secrets",
+      "stratus": "aws.credential-access.secretsmanager-batch-retrieve-secrets",
+      "mitre": "T1555.006",
+      "wazuh_id": 100705,
+      "athena_detected": true,
+      "athena_rows": 5,
+      "cloudtrail_event": {
+        "eventid": "656d73ef-df23-4098-af8d-6b18e0f56859",
+        "eventtime": "2026-11-04T22:00:00Z",
+        "eventname": "BatchGetSecretValue"
+      },
+      "wazuh_alert": null
+    },
+    {
+      "key": "ses-enumerate",
+      "stratus": "aws.discovery.ses-enumerate",
+      "mitre": "T1580",
+      "wazuh_id": 100706,
+      "athena_detected": true,
+      "athena_rows": 3,
+      "cloudtrail_event": {
+        "eventid": "d6368404-3cfc-4229-b77e-5823103b757e",
+        "eventtime": "2026-11-04T22:00:02Z",
+        "eventname": "GetAccountSendingEnabled"
+      },
+      "wazuh_alert": null
+    }
+  ]
+}

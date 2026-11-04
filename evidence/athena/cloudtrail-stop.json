@@ -1,0 +1,11 @@
+[
+  {
+    "eventtime": "2026-11-04T21:59:21Z",
+    "eventname": "StopLogging",
+    "eventsource": "cloudtrail.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "sourceipaddress": "160.79.106.143",
+    "awsregion": "us-east-1",
+    "eventid": "bf995dac-1d50-4eb5-942f-f1ce6d615b70"
+  }
+]

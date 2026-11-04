@@ -60,8 +60,8 @@ def main() -> int:
         start_dt = parse(args.start)
         end_dt = parse(args.end)
     else:
-        start_dt = parse(det["global_start"]) - dt.timedelta(seconds=120)
-        end_dt = parse(det["global_end"]) + dt.timedelta(seconds=120)
+        start_dt = parse(det["global_start"]) - dt.timedelta(seconds=60)
+        end_dt = parse(det["global_end"]) + dt.timedelta(seconds=60)
     start = start_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     end = end_dt.strftime("%Y-%m-%dT%H:%M:%SZ")
     start_date = start_dt.strftime("%Y/%m/%d")

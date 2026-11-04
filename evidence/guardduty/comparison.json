@@ -1,0 +1,64 @@
+{
+  "detector_id": null,
+  "guardduty_available": false,
+  "reason": "The AWS Access Key Id needs a subscription for the service",
+  "real_findings": 0,
+  "comparison": [
+    {
+      "key": "cloudtrail-stop",
+      "mitre": "T1562.008",
+      "own_detection": true,
+      "guardduty": null,
+      "guardduty_type": null,
+      "guardduty_latency_s": null
+    },
+    {
+      "key": "cloudtrail-event-selectors",
+      "mitre": "T1562.008",
+      "own_detection": true,
+      "guardduty": null,
+      "guardduty_type": null,
+      "guardduty_latency_s": null
+    },
+    {
+      "key": "iam-create-admin-user",
+      "mitre": "T1098.003",
+      "own_detection": true,
+      "guardduty": null,
+      "guardduty_type": null,
+      "guardduty_latency_s": null
+    },
+    {
+      "key": "iam-backdoor-user",
+      "mitre": "T1098.001",
+      "own_detection": true,
+      "guardduty": null,
+      "guardduty_type": null,
+      "guardduty_latency_s": null
+    },
+    {
+      "key": "s3-backdoor-bucket-policy",
+      "mitre": "T1537",
+      "own_detection": true,
+      "guardduty": null,
+      "guardduty_type": null,
+      "guardduty_latency_s": null
+    },
+    {
+      "key": "secretsmanager-batch-retrieve-secrets",
+      "mitre": "T1555.006",
+      "own_detection": true,
+      "guardduty": null,
+      "guardduty_type": null,
+      "guardduty_latency_s": null
+    },
+    {
+      "key": "ses-enumerate",
+      "mitre": "T1580",
+      "own_detection": true,
+      "guardduty": null,
+      "guardduty_type": null,
+      "guardduty_latency_s": null
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "eventtime": "2026-11-04T21:59:18Z",
+    "eventname": "PutBucketPolicy",
+    "eventsource": "s3.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "bucket": "stratus-red-team-ct-stop-5994923c-bucket",
+    "sourceipaddress": "160.79.106.21",
+    "awsregion": "us-east-1",
+    "eventid": "7183af5c-ede2-4160-8858-11838a53b7af"
+  },
+  {
+    "eventtime": "2026-11-04T21:59:28Z",
+    "eventname": "PutBucketPolicy",
+    "eventsource": "s3.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "bucket": "stratus-red-team-ctes-202fe874-bucket",
+    "sourceipaddress": "160.79.106.134",
+    "awsregion": "us-east-1",
+    "eventid": "cfb7ed69-9751-4816-a825-002e51eae342"
+  },
+  {
+    "eventtime": "2026-11-04T21:59:50Z",
+    "eventname": "PutBucketPolicy",
+    "eventsource": "s3.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "bucket": "stratus-red-team-bdbp-8f5ed102",
+    "sourceipaddress": "160.79.106.132",
+    "awsregion": "us-east-1",
+    "eventid": "84fe1233-c1ab-429d-87ad-1b2ea87f83b1"
+  }
+]

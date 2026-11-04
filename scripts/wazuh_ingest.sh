@@ -31,8 +31,13 @@ if [ -f "$ca" ]; then
 else
   CA_ENV=""
 fi
+# On a normal host the container shares the host's network and HTTPS_PROXY
+# works as-is. On the cloud VM the agent proxy is bound to the host's loopback,
+# which a bridge-network container cannot reach, so MANAGER_HTTPS_PROXY points
+# the wodle at a relay on the Docker gateway (see STATE.md, cloud decision).
+mgr_proxy="${MANAGER_HTTPS_PROXY:-${HTTPS_PROXY:-}}"
 PROXY_ENV=""
-[ -n "${HTTPS_PROXY:-}" ] && PROXY_ENV="-e HTTPS_PROXY=$HTTPS_PROXY -e HTTP_PROXY=${HTTP_PROXY:-$HTTPS_PROXY}"
+[ -n "$mgr_proxy" ] && PROXY_ENV="-e HTTPS_PROXY=$mgr_proxy -e HTTP_PROXY=$mgr_proxy"
 
 echo "wazuh_ingest: running the aws-s3 wodle over s3://$TRAIL_BUCKET ..."
 # shellcheck disable=SC2086
@@ -59,9 +64,10 @@ docker compose cp wazuh.manager:/var/ossec/logs/alerts/alerts.json \
 
 # Keep only the alerts from this week's rules (100700-100706).
 python3 - "$repo/evidence/wazuh/alerts_raw.json" "$repo/evidence/wazuh/alerts.json" <<'PY'
-import json, sys
+import json, re, sys
 raw, out = sys.argv[1], sys.argv[2]
 ids = {str(i) for i in range(100700, 100707)}
+AKIA = re.compile(r"A(KIA|SIA)[A-Z0-9]{16}")
 kept = []
 try:
     for line in open(raw):
@@ -78,6 +84,7 @@ except FileNotFoundError:
     pass
 with open(out, "w") as f:
     for a in kept:
-        f.write(json.dumps(a) + "\n")
+        # redact access key ids (public identifiers, but gitleaks flags them)
+        f.write(AKIA.sub("AKIA_REDACTED", json.dumps(a)) + "\n")
 print(f"wazuh_ingest: kept {len(kept)} matching alert(s) -> {out}")
 PY

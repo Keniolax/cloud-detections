@@ -1,0 +1,29 @@
+[
+  {
+    "eventtime": "2026-11-04T22:00:02Z",
+    "eventname": "GetAccountSendingEnabled",
+    "eventsource": "ses.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "sourceipaddress": "160.79.106.17",
+    "awsregion": "us-east-1",
+    "eventid": "d6368404-3cfc-4229-b77e-5823103b757e"
+  },
+  {
+    "eventtime": "2026-11-04T22:00:02Z",
+    "eventname": "GetSendQuota",
+    "eventsource": "ses.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "sourceipaddress": "160.79.106.17",
+    "awsregion": "us-east-1",
+    "eventid": "43a60a47-4364-4c84-8af8-1a6b8236a241"
+  },
+  {
+    "eventtime": "2026-11-04T22:00:02Z",
+    "eventname": "ListIdentities",
+    "eventsource": "ses.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "sourceipaddress": "160.79.106.17",
+    "awsregion": "us-east-1",
+    "eventid": "83c44836-6c26-432a-a79f-488dd35898fc"
+  }
+]

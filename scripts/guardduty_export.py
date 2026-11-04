@@ -48,13 +48,38 @@ def parse(ts: str) -> dt.datetime:
     return dt.datetime.strptime(ts, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=dt.timezone.utc)
 
 
+def unavailable(reason: str) -> int:
+    """GuardDuty is not usable in this account: record that honestly and still
+    write a comparison so the week's table has a GuardDuty column."""
+    (EVID / "guardduty").mkdir(parents=True, exist_ok=True)
+    techniques = yaml.safe_load((ROOT / "techniques.yaml").read_text())
+    det = json.loads((EVID / "detections.json").read_text())
+    comparison = []
+    for t in techniques:
+        own = next(x for x in det["techniques"] if x["key"] == t["key"])
+        comparison.append({
+            "key": t["key"], "mitre": t["mitre"],
+            "own_detection": own["athena_detected"],
+            "guardduty": None, "guardduty_type": None, "guardduty_latency_s": None,
+        })
+    (EVID / "guardduty" / "comparison.json").write_text(json.dumps(
+        {"detector_id": None, "guardduty_available": False,
+         "reason": reason, "real_findings": 0, "comparison": comparison}, indent=2) + "\n")
+    (EVID / "guardduty" / "findings.json").write_text("[]\n")
+    print(f"[gd] GuardDuty unavailable: {reason}")
+    print("[gd] wrote comparison with GuardDuty marked unavailable")
+    return 0
+
+
 def main() -> int:
     detector_id = sys.argv[1] if len(sys.argv) > 1 else None
     if not detector_id:
-        ids = cli(["guardduty", "list-detectors", "--region", REGION]).get("DetectorIds", [])
+        try:
+            ids = cli(["guardduty", "list-detectors", "--region", REGION]).get("DetectorIds", [])
+        except RuntimeError as e:
+            return unavailable(str(e).split(":", 2)[-1].strip())
         if not ids:
-            print("no GuardDuty detector found", file=sys.stderr)
-            return 1
+            return unavailable("no GuardDuty detector in this account")
         detector_id = ids[0]
 
     (EVID / "guardduty").mkdir(parents=True, exist_ok=True)

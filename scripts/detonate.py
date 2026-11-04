@@ -21,6 +21,20 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 EVID = ROOT / "evidence"
 
 
+import re
+
+AKIA = re.compile(r"A(KIA|SIA)[A-Z0-9]{16}")
+SECRET_LINE = re.compile(r"(secret[\w-]*\s*=\s*)\S+", re.IGNORECASE)
+
+
+def redact(text: str) -> str:
+    """Strip access key ids and any 'secret = value' pairs Stratus prints, so
+    the committed evidence never carries a credential (even a throwaway one)."""
+    text = AKIA.sub("AKIA_REDACTED", text)
+    text = SECRET_LINE.sub(r"\1<redacted>", text)
+    return text
+
+
 def now() -> str:
     return dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
@@ -43,7 +57,7 @@ def main() -> int:
         code, out = run(["stratus", "detonate", tid])
         t_end = now()
         ok = code == 0
-        tail = "\n".join(out.strip().splitlines()[-4:])
+        tail = redact("\n".join(out.strip().splitlines()[-4:]))
         print(f"  -> {'OK' if ok else 'FAILED'} ({t_start}..{t_end})", flush=True)
         if not ok:
             print(f"  stratus output:\n{out}", flush=True)

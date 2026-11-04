@@ -1,0 +1,20 @@
+[
+  {
+    "eventtime": "2026-11-04T21:58:36Z",
+    "eventname": "PutEventSelectors",
+    "eventsource": "cloudtrail.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "sourceipaddress": "160.79.106.18",
+    "awsregion": "us-east-1",
+    "eventid": "c4c96998-aa31-4fa7-830d-5f990bf65327"
+  },
+  {
+    "eventtime": "2026-11-04T21:59:31Z",
+    "eventname": "PutEventSelectors",
+    "eventsource": "cloudtrail.amazonaws.com",
+    "actor": "arn:aws:iam::198811874138:user/seceng-bootcamp",
+    "sourceipaddress": "160.79.106.135",
+    "awsregion": "us-east-1",
+    "eventid": "1de073df-a418-4af7-8ca3-f998c4e6e832"
+  }
+]

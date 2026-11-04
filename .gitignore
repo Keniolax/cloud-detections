@@ -14,3 +14,7 @@ evidence/raw/
 evidence/athena/*.csv
 __pycache__/
 .pytest_cache/
+
+# Full Wazuh alerts dump (contains unrelated alerts); only the filtered
+# alerts.json is shipped.
+evidence/wazuh/alerts_raw.json

@@ -21,7 +21,7 @@ output "athena_table" {
 }
 
 output "guardduty_detector_id" {
-  value = aws_guardduty_detector.main.id
+  value = var.enable_guardduty ? aws_guardduty_detector.main[0].id : ""
 }
 
 output "siem_user" {

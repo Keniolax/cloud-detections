@@ -1,0 +1,69 @@
+{
+  "global_start": "2026-11-04T21:59:11Z",
+  "global_end": "2026-11-04T22:00:02Z",
+  "detonations": [
+    {
+      "key": "cloudtrail-stop",
+      "stratus": "aws.defense-evasion.cloudtrail-stop",
+      "mitre": "T1562.008",
+      "start": "2026-11-04T21:59:11Z",
+      "end": "2026-11-04T21:59:21Z",
+      "ok": true,
+      "output_tail": "2026/11/04 21:59:12 Initializing Terraform\n2026/11/04 21:59:13 Applying Terraform to spin up technique prerequisites\n2026/11/04 21:59:21 CloudTrail trail arn:aws:cloudtrail:us-east-1:198811874138:trail/stratus-red-team-ct-stop-5994923c-trail ready\n2026/11/04 21:59:21 Stopping CloudTrail trail stratus-red-team-ct-stop-5994923c-trail"
+    },
+    {
+      "key": "cloudtrail-event-selectors",
+      "stratus": "aws.defense-evasion.cloudtrail-event-selectors",
+      "mitre": "T1562.008",
+      "start": "2026-11-04T21:59:21Z",
+      "end": "2026-11-04T21:59:31Z",
+      "ok": true,
+      "output_tail": "2026/11/04 21:59:22 Initializing Terraform\n2026/11/04 21:59:23 Applying Terraform to spin up technique prerequisites\n2026/11/04 21:59:31 CloudTrail trail arn:aws:cloudtrail:us-east-1:198811874138:trail/stratus-red-team-ctes-202fe874-trail ready, logging to S3 bucket stratus-red-team-ctes-202fe874-bucket\n2026/11/04 21:59:31 Applying event selector on CloudTrail trail stratus-red-team-ctes-202fe874-trail to disable logging management and data events"
+    },
+    {
+      "key": "iam-create-admin-user",
+      "stratus": "aws.persistence.iam-create-admin-user",
+      "mitre": "T1098.003",
+      "start": "2026-11-04T21:59:31Z",
+      "end": "2026-11-04T21:59:33Z",
+      "ok": true,
+      "output_tail": "2026/11/04 21:59:32 Creating a malicious IAM user\n2026/11/04 21:59:32 Attaching an administrative IAM policy to the malicious IAM user\n2026/11/04 21:59:33 Creating an access key for the IAM user\n2026/11/04 21:59:33 Created access key AKIA_REDACTED0"
+    },
+    {
+      "key": "iam-backdoor-user",
+      "stratus": "aws.persistence.iam-backdoor-user",
+      "mitre": "T1098.001",
+      "start": "2026-11-04T21:59:33Z",
+      "end": "2026-11-04T21:59:41Z",
+      "ok": true,
+      "output_tail": "2026/11/04 21:59:35 Applying Terraform to spin up technique prerequisites\n2026/11/04 21:59:40 IAM user stratus-red-team-backdoor-78263e17-usr ready\n2026/11/04 21:59:40 Creating access key on legit IAM user to simulate backdoor\n2026/11/04 21:59:41 Successfully created access key AKIA_REDACTED0"
+    },
+    {
+      "key": "s3-backdoor-bucket-policy",
+      "stratus": "aws.exfiltration.s3-backdoor-bucket-policy",
+      "mitre": "T1537",
+      "start": "2026-11-04T21:59:41Z",
+      "end": "2026-11-04T21:59:50Z",
+      "ok": true,
+      "output_tail": "2026/11/04 21:59:41 Initializing Terraform\n2026/11/04 21:59:43 Applying Terraform to spin up technique prerequisites\n2026/11/04 21:59:50 S3 bucket stratus-red-team-bdbp-8f5ed102 ready\n2026/11/04 21:59:50 Backdooring bucket policy of stratus-red-team-bdbp-8f5ed102"
+    },
+    {
+      "key": "secretsmanager-batch-retrieve-secrets",
+      "stratus": "aws.credential-access.secretsmanager-batch-retrieve-secrets",
+      "mitre": "T1555.006",
+      "start": "2026-11-04T21:59:50Z",
+      "end": "2026-11-04T22:00:01Z",
+      "ok": true,
+      "output_tail": "\tstratus-red-team-retrieve--batch-secret-6ba67c39-34 = <redacted-secret-value>\n2026/11/04 22:00:01 Successfully retrieved a batch of 2 secrets\n\tstratus-red-team-retrieve--batch-secret-6ba67c39-41 = <redacted-secret-value>\n\tstratus-red-team-retrieve--batch-secret-6ba67c39-14 = <redacted-secret-value>"
+    },
+    {
+      "key": "ses-enumerate",
+      "stratus": "aws.discovery.ses-enumerate",
+      "mitre": "T1580",
+      "start": "2026-11-04T22:00:01Z",
+      "end": "2026-11-04T22:00:02Z",
+      "ok": true,
+      "output_tail": "2026/11/04 22:00:02 Enumerating verified SES identities using ses:ListIdentities\n2026/11/04 22:00:02 No verified SES identities found\n2026/11/04 22:00:02 Enumerating SES quotas\n2026/11/04 22:00:02 Current quotas: max24hoursend: 200, maxsendrate: 1, sentlast24hours: 0"
+    }
+  ]
+}

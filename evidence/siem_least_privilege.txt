@@ -1,0 +1,18 @@
+# SIEM identity least-privilege check
+# user: seceng-cloud-det-siem (keys are the read-only SIEM identity, not admin)
+# taken: 2026-11-04T22:02:59Z
+
+## ALLOWED: list the trail bucket
+                           PRE 198811874138/
+
+## DENIED: read the Athena results bucket
+
+An error occurred (AccessDenied) when calling the ListObjectsV2 operation: User: arn:aws:iam::198811874138:user/seceng-cloud-det-siem is not authorized to perform: s3:ListBucket on resource: "arn:aws:s3:::seceng-cloud-det-athena-results-198811874138" because no identity-based policy allows the s3:ListBucket action
+
+## DENIED: list IAM users
+
+An error occurred (AccessDenied) when calling the ListUsers operation: User: arn:aws:iam::198811874138:user/seceng-cloud-det-siem is not authorized to perform: iam:ListUsers on resource: arn:aws:iam::198811874138:user/ because no identity-based policy allows the iam:ListUsers action. 
+
+## DENIED: list all S3 buckets
+
+An error occurred (AccessDenied) when calling the ListBuckets operation: User: arn:aws:iam::198811874138:user/seceng-cloud-det-siem is not authorized to perform: s3:ListAllMyBuckets because no identity-based policy allows the s3:ListAllMyBuckets action

@@ -1,0 +1,15 @@
+# gitleaks config for this repo. Extends the default rules and allowlists one
+# false positive: CloudTrail's tlsDetails.cipherSuite field records the TLS
+# cipher / key-exchange name (e.g. X25519MLKEM768), which gitleaks' high-entropy
+# heuristic flags as a generic API key. It is a public algorithm name, not a
+# secret. Real secrets never enter git: .env and *.tfstate* are git-ignored.
+[extend]
+useDefault = true
+
+[allowlist]
+description = "TLS cipher-suite names in CloudTrail evidence are not secrets"
+regexTarget = "match"
+regexes = [
+  '''X25519MLKEM768''',
+  '''TLS_[A-Z0-9_]+''',
+]
